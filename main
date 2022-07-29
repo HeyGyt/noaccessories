@@ -1,61 +1,9 @@
 local lp = game.Players.LocalPlayer
 local char = lp.Character
 
-for i, v in pairs(char:GetChildren()) do
-    if v:IsA("BallSocketConstraint") then
-        v:Destroy()
+for _, v in pairs(char:GetChildren()) do
+    if v:IsA("Accessory") then
+        v.Handle:Remove()
+        v.Parent = nil
     end
-end
-
-for i, v in pairs(char:GetChildren()) do
-    if v:IsA("HingeConstraint") then
-        v:Destroy()
-    end
-end
-
-for i, v in pairs(char.Humanoid:GetAccessories()) do
-local hat = v.Name
-
-char[hat].Archivable = true
-local fake = char[hat]:Clone()
-fake.Parent = char
-fake.Handle.Transparency = 1
-
-local hold = false
-local enabled = false
-
-char[hat].Handle.AccessoryWeld:Destroy()
-
-local tool = Instance.new("Tool", lp.Backpack)
-tool.RequiresHandle = true
-tool.CanBeDropped = false
-tool.Name = hat
-
-local handle = Instance.new("Part", tool)
-handle.Name = "Handle"
-handle.Size = Vector3.new(1, 1, 1)
-handle.Massless = true
-handle.Transparency = 1
-
-local positions = {
-    forward = tool.GripForward,
-    pos = tool.GripPos,
-    right = tool.GripRight,
-    up = tool.GripUp
-}
-
-tool.Equipped:connect(function()
-
-end)
-
-tool.Unequipped:connect(function()
-
-end)
-
-tool.Activated:connect(function()
-
-end)
-tool.Parent = nil
-
-
 end
